@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatForge — Public Chat Servers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Username Modal -->
+<div id="username-modal" class="modal-overlay active">
+  <div class="modal">
+    <div class="modal-logo">⬡</div>
+    <h2 class="modal-title">ChatForge</h2>
+    <p class="modal-sub">Public servers. Real conversations.</p>
+    <div class="input-group">
+      <label>Choose your username</label>
+      <input type="text" id="username-input" placeholder="e.g. cosmic_wanderer" maxlength="32" autocomplete="off" />
+    </div>
+    <button class="btn-primary" id="username-submit">Enter the Forge</button>
+  </div>
+</div>
+
+<!-- Create Server Modal -->
+<div id="create-modal" class="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="close-create">✕</button>
+    <h2 class="modal-title">New Server</h2>
+    <p class="modal-sub">Build your community</p>
+    <div class="input-group">
+      <label>Server Name</label>
+      <input type="text" id="new-server-name" placeholder="My Awesome Server" maxlength="64" />
+    </div>
+    <div class="input-group">
+      <label>Icon Emoji</label>
+      <input type="text" id="new-server-icon" placeholder="🚀" maxlength="4" />
+    </div>
+    <div class="input-group">
+      <label>Description</label>
+      <textarea id="new-server-desc" placeholder="What's this server about?" maxlength="256" rows="3"></textarea>
+    </div>
+    <button class="btn-primary" id="create-server-submit">Create Server</button>
+    <div id="create-error" class="error-msg"></div>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="app" class="app hidden">
+
+  <!-- Server Sidebar -->
+  <nav class="sidebar-servers" id="server-sidebar">
+    <div class="sidebar-logo" title="ChatForge">⬡</div>
+    <div class="sidebar-divider"></div>
+    <div class="server-list" id="server-icon-list"></div>
+    <div class="sidebar-divider"></div>
+    <button class="server-add-btn" id="open-create" title="Create Server">+</button>
+  </nav>
+
+  <!-- Channel / Server Panel -->
+  <aside class="sidebar-channels" id="channel-panel">
+    <div class="channel-header">
+      <span id="discovery-title">🌐 Discover Servers</span>
+    </div>
+
+    <!-- Discovery view -->
+    <div id="discovery-view">
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Search servers…" />
+      </div>
+      <div class="server-cards" id="server-cards-list"></div>
+    </div>
+
+    <!-- Server channels view (single #general channel) -->
+    <div id="server-channels-view" class="hidden">
+      <div class="server-info-panel" id="active-server-info"></div>
+      <div class="channel-list">
+        <div class="channel-category">TEXT CHANNELS</div>
+        <div class="channel-item active" id="general-channel">
+          <span class="channel-hash">#</span> general
+        </div>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-tag">
+          <span class="user-dot"></span>
+          <span id="footer-username"></span>
+        </div>
+        <button class="leave-btn" id="leave-server-btn" title="Leave Server">↩</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Chat Area -->
+  <main class="chat-main" id="chat-main">
+
+    <!-- Discovery splash -->
+    <div id="discovery-splash" class="splash">
+      <div class="splash-icon">⬡</div>
+      <h2>Welcome to ChatForge</h2>
+      <p>Pick a server from the left, or create your own.</p>
+      <button class="btn-primary" id="splash-create">Create a Server</button>
+    </div>
+
+    <!-- Chat view -->
+    <div id="chat-view" class="hidden">
+      <div class="chat-topbar">
+        <span class="chat-hash">#</span>
+        <span class="chat-channel-name">general</span>
+        <span class="chat-server-name" id="chat-server-label"></span>
+        <div class="topbar-actions">
+          <button class="topbar-btn" id="mod-toggle" title="Moderation">🛡</button>
+        </div>
+      </div>
+
+      <div class="messages-wrap" id="messages-wrap">
+        <div class="messages" id="messages-list"></div>
+      </div>
+
+      <div class="chat-input-wrap">
+        <div class="chat-input-bar">
+          <span class="input-hash">#</span>
+          <input type="text" id="msg-input" placeholder="Message #general" maxlength="2000" autocomplete="off" />
+          <button class="send-btn" id="send-btn">↑</button>
+        </div>
+        <div class="chat-input-hint">
+          <span id="online-count"></span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
